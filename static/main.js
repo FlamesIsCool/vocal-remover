@@ -54,8 +54,16 @@ async function handleFile(file) {
     const res = await uploadWithProgress('/api/upload', form, (pct) => {
       setProgress(Math.max(5, pct), pct < 100 ? 'Uploading…' : 'Processing… (this can take a bit)');
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || 'Upload failed');
+
+    // Read body as text first so we can handle HTML/empty error pages
+    const text = await res.text();
+    let data = {};
+    try { data = text ? JSON.parse(text) : {}; } catch { /* not JSON */ }
+
+    if (!res.ok) {
+      const detail = data.detail || text || `HTTP ${res.status}`;
+      throw new Error(detail);
+    }
 
     setProgress(100, 'Done');
     if (statusEl) statusEl.textContent = 'Separated successfully.';
@@ -65,6 +73,7 @@ async function handleFile(file) {
     if (statusEl) statusEl.textContent = 'Error: ' + err.message;
   }
 }
+
 
 function uploadWithProgress(url, formData, onProgress) {
   return new Promise((resolve, reject) => {
