@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vocal Remover</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); }
+    .dropzone { transition: all .25s; }
+    .dropzone.dragover { border-color: #60a5fa; background: rgba(96,165,250,0.1); transform: scale(1.01); }
+    details summary::-webkit-details-marker { display:none; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <header class="flex items-center justify-between mb-10">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Vocal Remover</h1>
+      <span class="text-sm text-gray-500">Powered by Demucs</span>
+    </header>
+
+    <main class="grid md:grid-cols-2 gap-6">
+      <section class="glass rounded-2xl p-6 shadow-lg">
+        <h2 class="text-xl font-semibold mb-4">Upload a track</h2>
+        <div id="dropzone" class="dropzone border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
+          <p class="text-gray-600 mb-2">Drag & drop an audio file here</p>
+          <p class="text-gray-400 text-sm">or</p>
+          <label class="inline-block mt-3 px-4 py-2 rounded-xl bg-black text-white cursor-pointer hover:opacity-90">
+            Browse…
+            <input id="fileInput" type="file" accept=".mp3,.wav,.m4a,.flac,.ogg,.aac" class="hidden">
+          </label>
+          <p class="text-xs text-gray-400 mt-3">MP3, WAV, M4A, FLAC, OGG, AAC</p>
+        </div>
+
+        <div id="progressWrap" class="mt-6 hidden">
+          <div class="flex justify-between mb-1">
+            <span id="progressLabel" class="text-sm text-gray-600">Uploading…</span>
+            <span id="progressPct" class="text-sm text-gray-600">0%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="progressBar" class="bg-black h-2 rounded-full" style="width:0%"></div>
+          </div>
+          <p id="status" class="text-xs text-gray-500 mt-2"></p>
+        </div>
+      </section>
+
+      <section class="glass rounded-2xl p-6 shadow-lg">
+        <h2 class="text-xl font-semibold mb-4">Your stems</h2>
+        <div id="results" class="space-y-5">
+          <div class="text-gray-400 text-sm">Upload a track to see: Original, Vocals Only, Instrumental (+Drums, Bass, Other)</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-center text-xs text-gray-400 mt-12">
+      Built for you — enjoy 🎵
+    </footer>
+  </div>
+  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="Aura2" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>

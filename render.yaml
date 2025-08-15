@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: vocal-remover
+    env: python
+    plan: starter
+    region: oregon
+    branch: main
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "python app.py"
+    disk:
+      name: output-data
+      mountPath: /app/outputs
+      sizeGB: 5
